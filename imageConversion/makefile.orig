@@ -1,0 +1,21 @@
+ifeq (,$(filter _%,$(notdir $(CURDIR))))
+include target.mk
+else
+#----- End Boilerplate
+IMGLIB=../src/ImgLib
+
+VPATH = $(SRCDIR) $(IMGLIB)
+
+CFLAGS=-O3 -ftree-vectorize -arch ppc -arch i386 -arch ppc64 -arch x86_64
+SRC_FILES = ImgLib.c analyzeUtil.c ImgLibError.c VLib.c MathLib.c getopt.c imconvert.c
+O_FILES   = $(SRC_FILES:%.c=%.o)
+
+all: $(O_FILES) imconvert
+
+%.o: %.c
+	$(COMPILE.c) $< $(OUTPUT_OPTION)
+
+%: ${O_FILES} 
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+#----- Begin Boilerplate
+endif
