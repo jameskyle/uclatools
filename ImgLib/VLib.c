@@ -3,7 +3,7 @@
 -->
 * <font size=+2><b>VLib - vector processing and utility library</b></font>
 * <i>Please note saving date below:</i>
-* <font size=+1><b>$Date: 2007/06/27 17:33:26 $</b></font><p>
+* <font size=+1><b>$Date: 2006/06/09 18:48:00 $</b></font><p>
 *    A set of primitives for use in image processing.
 *               c 1996-2002  Mark S. Cohen
 *    
@@ -31,10 +31,6 @@
 *    in-place operations.
 * <!--
 * $Log: VLib.c,v $
-* Revision 1.48  2007/06/27 17:33:26  mscohen
-* Fixed type conversions for complex data
-* Changed argument list for vmag (now assumes that input data are float)
-*
 * Revision 1.47  2006/06/09 18:48:00  mscohen
 * code cleanup
 *
@@ -332,7 +328,7 @@ OSErr	LogMessage( char *MessageString )
 <!-- ************************************************************************/
 void GetVLibVer( char *buff ) /* return a string describing VLib revision */
 {
-   static char id[] = "$Revision: 1.48 $$Date: 2007/06/27 17:33:26 $";
+   static char id[] = "$Revision: 1.47 $$Date: 2006/06/09 18:48:00 $";
    char versionStr[31];
    char buffer[63];
 
@@ -2876,7 +2872,7 @@ OSErr type_convert( void *inData, int inType, void *convertedData, int outType,
 		/* *convertedData; pointer to converted data */
 		/* outType;        converted data type */
 		/* nPts;           total number of pixels to convert */
-		/* *rules         what happened to the data? */
+		/* *rules          what happened to the data? */
 {
 
 	long           i;          /* counter */
@@ -3060,7 +3056,8 @@ float and short types must be rescaled to convert to char or short. */
 		case T_FLOAT:
 			pf = (float *)inData; /* input is float */
 			if( inType == T_COMPLEX ) {
-				error = vmag( pf, 2, pf, 1, nPts );
+				pf = (float *)ck_malloc( nPts * get_datasize(T_FLOAT), "Space for Complex to Float conversion" );
+				error = vmag( (float *)inData, 2, pf, 1, nPts );
 				RETURNONERROR;
 			}
 			error = vminmax( pf, nPts, fmax, fmin, T_FLOAT );
@@ -3209,6 +3206,10 @@ float and short types must be rescaled to convert to char or short. */
 
 				}
 			}
+			if( inType == T_COMPLEX ) {
+				free( pf );
+			}
+
 		break;
 
 		default:
