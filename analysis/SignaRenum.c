@@ -1,7 +1,7 @@
 /* $Id */
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 /* This program simply renames files */
 
 main (int argc, char *argv[] )

@@ -50,6 +50,11 @@ Brain Mapping Center support pages</a>.
 </td></tr></table></center>
 <pre>
 <!--
+Revision 1.29 2008/08/13 22:59 jkyle
+changed CalcDimensions to ZCalcDimensions due to conflict
+with mathLib.h declaration of same function. Also renamed, FirstFT to EFirstFT
+for same reason.
+
 $Id: equalize.c,v 1.28 2003/05/13 05:29:39 zrinka Exp $
 $Log: equalize.c,v $
 Revision 1.28  2003/05/13 05:29:39  zrinka
@@ -156,7 +161,9 @@ Primarily html changes
 #include <console.h>
 #endif
 
+#ifndef OSErr
 #define OSErr short
+#endif
 #define noErr 0
 
 FILE	*MessageLog;
@@ -166,10 +173,10 @@ void   InitGlobals( void );
 OSErr  ProcessCommandLine( int argc, char *argv[] );
 void   print_usage( char *name );
 void   print_help( char *name );
-OSErr  CalcDimensions( IMAGE *im, float *zscale );
+OSErr  ZCalcDimensions( IMAGE *im, float *zscale );
 OSErr  PadImageSize( IMAGE *im );
 float  CalcAverage( float *gThresh, float *data, long pts, long *validPts );
-OSErr  FirstFT( float *imData );
+OSErr  EFirstFT( float *imData );
 OSErr  kSmooth( float *imData, float *gaussKernel );
 OSErr  ExtractImage( float *imData, float *RawData, short extract_img, IMAGE *im );
 void   NormalizeAndPad( float *SmoothData, float *RawData, float averageInt );
@@ -377,12 +384,12 @@ if( response[0] == 'y' || response[0] == 'Y' ) {
 }
 }
 
-/******************************    CalcDimensions      ******************************
+/******************************    ZCalcDimensions      ******************************
 *
 *	Given the IMAGE struct, define the dimensions used for local processing.
 *	Mostly used to shorten variable names.
 *************************************************************************************/
-OSErr CalcDimensions( IMAGE *im, float *zscale )
+OSErr ZCalcDimensions( IMAGE *im, float *zscale )
 {
 	
 	gXS = im->dim.x;
@@ -514,12 +521,12 @@ float CalcAverage( float *Thresh, float *data, long pts, long *validPts )
 	return average;
 }
 
-/*******************************   FirstFT   *******************************
+/*******************************   EFirstFT   *******************************
 *
 *	The first Fourier Transform is slightly more complicated, as it
 *	involves a quadrant exchange and intensity scaling
 **************************************************************************/     
-OSErr FirstFT( float *imData )
+OSErr EFirstFT( float *imData )
 {
 	float FTscale;
 	OSErr error = noErr;
@@ -531,14 +538,14 @@ OSErr FirstFT( float *imData )
 	}
 
 	error = vsmul( imData, 2, imData, 2, (void *)&FTscale, gDataVolSize, T_FLOAT );	// Adjust intensity for FT effects
-	ILError( error, "FirstFT - vsmul" );
+	ILError( error, "EFirstFT - vsmul" );
 	
 	if( !gVolumeMode ) {
 		error = cfft2d( imData, gDataXS, gDataYS, FORWARD );
-		ILError( error, "cfft2d-FirstFT" );
+		ILError( error, "cfft2d-EFirstFT" );
 	} else {
 		error = cfft3d( imData, gDataXS, gDataYS, gDataZS, FORWARD );
-		ILError( error, "cfft3d-FirstFT" );
+		ILError( error, "cfft3d-EFirstFT" );
 	}
 	
 	if( !gVolumeMode ) {
@@ -877,7 +884,7 @@ int main(int argc, char **argv)
 	}
 
 // Determine image dimensions
-	error = CalcDimensions( &im, &zscale);
+	error = ZCalcDimensions( &im, &zscale);
 	if( error ) return error;
 
 // Memory allocations
@@ -1043,8 +1050,8 @@ printf( "gDataVolSize: %ld\n", gDataVolSize );
 // Back transform. This convolves the image with the desired gaussian
 		printf( "\tFirst FFT...\n" );	
 
-		error = FirstFT( imData );
-		ILError( error, "FirstFT");
+		error = EFirstFT( imData );
+		ILError( error, "EFirstFT");
 		
 		printf( "\tk-space smoothing...\n\t" );
 		

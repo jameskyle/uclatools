@@ -503,7 +503,7 @@ while ( (argp=getopt(argc,argv,"o:i:p:N:R:L:U:bIFGKVQvhs")) != EOF )
       case '?':
           print_usage( argv[0] );
           fprintf(stderr, "\n\n");
-          sprintf( buffer,"cat \/usr\/users\/dox\/CC_help.h");
+          sprintf( buffer,"cat/usr/users/dox/CC_help.h");
           system( buffer );
           exit(-1);
       default:
@@ -810,7 +810,7 @@ while( !procDone )  /* Loop through time series */
      if( !FirstPassComplete && RT )
      {
         sprintf( buffer, "%s.covlRT.buchar", output_fname );
-        fp = errfopen( "\/pd\/images\/magicoverlay", "wb" );
+        fp = errfopen( "/pd/images/magicoverlay", "wb" );
         fprintf( fp, "%s", buffer );
         fclose( fp );
      }

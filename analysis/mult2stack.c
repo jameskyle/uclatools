@@ -16,7 +16,7 @@ void print_usage( char *name )
 	fprintf( stderr, "Outputs a processing record: outputname.%s.proc\n",name);
 }
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	static char id[] = "$Revision: 1.5 $$Date: 2002/09/10 22:14:51 $";
     char    *invec, *outvec;   /* image vectors */
@@ -132,4 +132,6 @@ void main(int argc, char **argv)
 
 	free( outvec );
 	free( invec );
+
+  return 0;
 }
