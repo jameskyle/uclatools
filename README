@@ -1,0 +1,17 @@
+Installation:
+  The UCLATools project requires cmake to build. CMAKE can be obtained at 
+  http://www.cmake.org/HTML/index.html or with your favorite package manager, 
+  e.g. macports, fink, ports, apt, etc.
+
+  The install is standard with the default prefix of /usr/local/UCLATools.
+  1. mkdir bingcc
+  2. cmake $project_path
+  3. make && make install
+
+  To set a custom install path:
+  1. cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local
+  where "/usr/local" is your custom install path.
+
+  For debugging output. For now, this just enables verbose output.
+  1. cmake -DCMAKE_BUILD_TYPE:String=Debug
+  
