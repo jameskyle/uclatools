@@ -224,7 +224,6 @@ typedef struct                              /*      dsr              */
 /* --> */
 OSErr  EmptyAnaHdr( dsr* DSR, char *description, float sliceSpacing,
 	 int xs, int ys, int n_slices, int time_pts, char orient ); /* analyzeUtil.c */
-int    get_datasize(int data_type); /* analyzeUtil.c */
 OSErr  vbyteswap(void *ivec, long vlen, int data_type); /* analyzeUtil.c */
 void ShowAnalyzeHeader( dsr *DSR, FILE *fp, char *name ); /* analyzeUtil.c */
 short swapHdrBytes( void *Hdr ); /* analyzeUtil.c */

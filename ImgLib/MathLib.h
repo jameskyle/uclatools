@@ -72,13 +72,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-
-#ifndef __VLIB__
 #include  "VLib.h"
-#endif
-#ifndef __IMGLIBH__
 #include  "ImgLib.h"
-#endif
 
 #define PI 3.141592654
 
