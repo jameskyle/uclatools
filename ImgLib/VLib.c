@@ -848,7 +848,7 @@ OSErr CreateTempFile( FILE **TempFile, char **itsName )
 	OSErr   error = noErr;
 	
 	*itsName = (char *)malloc( L_tmpnam );
-	tmpnam( *itsName );
+	mkstemp( *itsName );
 	
 	error = ck_fopen( TempFile, *itsName, "w" );
 	
