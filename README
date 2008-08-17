@@ -3,7 +3,9 @@ Installation:
   http://www.cmake.org/HTML/index.html or with your favorite package manager, 
   e.g. macports, fink, ports, apt, etc.
 
-  The install is standard with the default prefix of /usr/local/UCLATools.
+  The install is standard with the default prefix of ${UCLATOOLS_SRC_DIR}.
+  Basically, this means you'll find al the binaries in the source directory
+  under bin.
   1. mkdir bingcc
   2. cmake $project_path
   3. make && make install
