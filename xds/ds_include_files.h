@@ -1,0 +1,14 @@
+#include <db_defines.h>
+#include <ds_date.h>
+#include <ds_head_acr_groups_types.h>
+#include <ds_head_basic_types.h>
+#include <ds_head_constants.h>
+#include <ds_head_image_text_type.h>
+#include <ds_head_shadow_groups_types.h>
+#include <ds_head_type.h>
+#include <imainfo.h>
+#include <lib3_db_access.h>
+#include <lib3_errno.h>
+#include <lib3_file_transform.h>
+#include <patinfo.h>
+#include <stuinfo.h>

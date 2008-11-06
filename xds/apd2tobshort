@@ -1,0 +1,32 @@
+#!/bin/sh
+
+echo "Warning; new APD2 format, this slow script will soon be replaced."
+echo "Usage: apd2tobshort apd2input output num_slices num_times [-2 ...]"
+echo "Note: -2 or other repack parameters may be added at the end."
+
+infile=`dirname $1`/`basename $1 .img`
+shift
+outfile=`dirname $1`/`basename $1 .bshort`
+shift
+num_slices=$1
+shift
+images_per_slice=$1;
+shift
+remainder=$1
+
+slice=0;
+while [ $slice -lt $num_slices ] 
+do
+	skip=`bc <<EOF
+$slice * $images_per_slice
+EOF`
+	slice=`awk '{ printf("%03d", $0); }' <<EOF
+$slice
+EOF`
+	echo -n ${outfile}_$slice.bshort...
+	repack $remainder -q -s $skip -\# $images_per_slice $infile.img -o ${outfile}_$slice.bshort 
+	echo "Done."
+	slice=`bc <<EOF
+$slice + 1
+EOF`
+done

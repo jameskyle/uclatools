@@ -1,0 +1,13 @@
+x Only use activationmap colors when -A option has been used.
+x Align activationmap
+x Add colorbar with axis
+x Make arrow keys move the otl
+x Make otl's move separately, and check for boundaries
+x Make pageup/down step through images
+Be more careful about speed
+Add axes to graph
+Set up print command
+Add paradigm and physiological info to graph
+Add tcl or other menu functionality
+Add command line options for geometry, fonts, etc. and resources.
+Add 2 regions (neg & pos) of activation colors.
