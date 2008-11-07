@@ -6,7 +6,6 @@
   CHANGE FILE: (none)
 #endif
 /* 3: */
-//#include "read_otl.h"
 #include "read_image.h"
 void* malloc();
 

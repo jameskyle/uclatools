@@ -5,22 +5,8 @@
 **
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <search.h>
-#include <string.h>
-#include <memory.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include "error.h"
+#include "symtab.h"
 
-char		*symKeyTable;
-char		*symValueTable;
-
-char		*symString;
-
-ENTRY		*hsearch();
 
 
 int
