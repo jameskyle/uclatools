@@ -1,13 +1,14 @@
 Installation:
-  The UCLATools project requires cmake to build. CMAKE can be obtained at 
-  http://www.cmake.org/HTML/index.html or with your favorite package manager, 
+  The UCLATools project requires cmake to build. CMAKE can be obtained at
+  http://www.cmake.org/HTML/index.html or with your favorite package manager,
   e.g. macports, fink, ports, apt, etc.
 
   The install is standard with the default prefix of ${UCLATOOLS_SRC_DIR}.
   Basically, this means you'll find al the binaries in the source directory
   under bin.
   1. mkdir bingcc
-  2. cmake $project_path
+  2. cd bingcc
+  2. cmake ..
   3. make && make install
 
   To set a custom install path:
@@ -16,4 +17,4 @@ Installation:
 
   For debugging output. For now, this just enables verbose output.
   1. cmake -DCMAKE_BUILD_TYPE:String=Debug
-  
+
