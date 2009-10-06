@@ -8,8 +8,8 @@ Installation:
   under bin.
   1. mkdir bingcc
   2. cd bingcc
-  2. cmake ..
-  3. make && make install
+  3. cmake ..
+  4. make && make install
 
   To set a custom install path:
   1. cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local
