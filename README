@@ -11,9 +11,9 @@ Installation:
   3. make && make install
 
   To set a custom install path:
-  1. cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local
+  1. cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local $project_path
   where "/usr/local" is your custom install path.
 
   For debugging output. For now, this just enables verbose output.
-  1. cmake -DCMAKE_BUILD_TYPE:String=Debug
+  1. cmake -DCMAKE_BUILD_TYPE:String=Debug $project_path
   
