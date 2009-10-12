@@ -3319,14 +3319,45 @@ char *irpStringFromIMAGE( IMAGE *im )
 	irpString = ck_malloc( 1024, "irpString" );
 
 sprintf( irpString,
-"num_slices     %d\nimages_per_slice     %d\n\
-NEX     %d\nxsize     %d\nysize     %d\npart_phase     %d\npart_read     %d\noversample     %d\n\
-interleave     %d\nread_fov     %d\nphase_fov     %d\nxextra     %d\nxover     %d\n\
-magnitude_image     %d\nI_image     %d\nQ_image     %d\nphase_image     %d\ntime_data     %d\n\
-rotation     0\nreflection_x     1\nreflection_y     0",
-im->dim.n_slices, im->dim.timePts, im->dim.x, im->dim.y, partPhase, partRead, overSample,
-im->acq.interleave, im->dim.acqfov, im->dim.acqfov_rect, xextra, xover, magnitude,
-I_image, Q_image, phase_image, time_data );
+"num_slices     %d\n\
+images_per_slice     %d\n\
+NEX     %f\n\
+xsize     %d\n\
+ysize     %d\n\
+part_phase     %d\n\
+part_read     %d\n\
+oversample     %d\n\
+interleave     %d\n\
+read_fov     %d\n\
+phase_fov     %d\n\
+xextra     %hd\n\
+xover     %hd\n\
+magnitude_image     %d\n\
+I_image     %d\n\
+Q_image     %d\n\
+phase_image     %d\n\
+time_data     %d\n\
+rotation     0\n\
+reflection_x     1\n\
+reflection_y     0",
+im->dim.n_slices, 
+im->dim.timePts, 
+im->acq.nex,
+im->dim.x, 
+im->dim.y, 
+partPhase, 
+partRead, 
+overSample,
+(int)im->acq.interleave, 
+(int)im->dim.acqfov, 
+(int)im->dim.acqfov_rect, 
+xextra, 
+xover, 
+magnitude,
+I_image, 
+Q_image, 
+phase_image, 
+time_data );
 
 	return irpString;
 }
@@ -3490,7 +3521,7 @@ OSErr  CreateHeader( int FileType, IMAGE *im, char *baseName )
 
 			error = ck_fopen( &hdrFile, HeaderName,"w");
 			RETURNONERROR;
-			fprintf( hdrFile, irpStringFromIMAGE( im ) );
+			fprintf( hdrFile, "%s", irpStringFromIMAGE( im ) );
 			error = ck_fclose( hdrFile );
 			break;
 
@@ -4372,7 +4403,7 @@ OSErr ParseANMRHeader( char *headerData, IMAGE *im )
 	short   pixMult;        /* change in number of pixels with cropping/interpolation */
 	char	buffer[128];	/* just to store nothing */
 
-	if( sscanf( headerData, "%s%hd%s%hd%s%s%s%hd%s%hd%s%s%s%s%s%s%s%s%s%f%s%f",
+	if( sscanf( headerData, "%s%hd%s%d%s%s%s%hd%s%hd%s%s%s%s%s%s%s%s%s%f%s%f",
 	             buffer,                  /* skip unneeded info */
 	             &im->dim.n_slices,
 	             buffer,

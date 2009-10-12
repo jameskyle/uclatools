@@ -236,7 +236,7 @@ OSErr  ImageToAnalyzeHeader( IMAGE *im, dsr *DSR, short *result )
 		DSR->dime.glmin = -INT_MAX;
 	}
 	
-	sprintf( DSR->hist.scannum, "E%0.3dS%0.2dI%0.2d", im->acq.im_exno,
+	sprintf( DSR->hist.scannum, "E%.3dS%.2dI%.2d", im->acq.im_exno,
 	         im->acq.im_seno, im->acq.im_no );
 
 	strncpy( DSR->hist.patient_id, im->subj.patid, 15 );
@@ -310,13 +310,13 @@ void ShowAnalyzeHeader( dsr *DSR, FILE *fp, char *name )
 	fprintf( fp, "dime.funused3:    %f\n", DSR->dime.funused3 );
 	fprintf( fp, "dime.cal_max:     %f\n", DSR->dime.cal_max );
 	fprintf( fp, "dime.cal_min:     %f\n", DSR->dime.cal_min );
-	fprintf( fp, "dime.compressed:  %ld\n", DSR->dime.compressed );
-	fprintf( fp, "dime.verified:    %ld\n", DSR->dime.verified );
-	fprintf( fp, "dime.glmax:       %ld\n", DSR->dime.glmax );
-	fprintf( fp, "dime.glmin:       %ld\n", DSR->dime.glmin );
+	fprintf( fp, "dime.compressed:  %d\n", DSR->dime.compressed );
+	fprintf( fp, "dime.verified:    %d\n", DSR->dime.verified );
+	fprintf( fp, "dime.glmax:       %d\n", DSR->dime.glmax );
+	fprintf( fp, "dime.glmin:       %d\n", DSR->dime.glmin );
 	fprintf( fp, "\n" );
 	fprintf( fp, "hist.descrip:    \"%-40.40s\"\n", DSR->hist.descrip );
-	fprintf( fp, "                 \"%-40.40s\"\n", DSR->hist.descrip[40]);
+	fprintf( fp, "                 \"%c\"\n", DSR->hist.descrip[40]);
 	fprintf( fp, "hist.aux_file:   \"%-24s\"\n", DSR->hist.aux_file );
 	fprintf( fp, "hist.orient:     \"%c\"\n", DSR->hist.orient );
 	fprintf( fp, "hist.originator: \"%-10s\"\n", DSR->hist.originator );
@@ -327,14 +327,14 @@ void ShowAnalyzeHeader( dsr *DSR, FILE *fp, char *name )
 	fprintf( fp, "hist.exp_date:   \"%-10s\"\n", exp_date );
 	fprintf( fp, "hist.exp_time:   \"%-10s\"\n", DSR->hist.exp_time );
 	fprintf( fp, "hist.hist_un0:   \"%-3s\"\n", DSR->hist.hist_un0 );
-	fprintf( fp, "hist.views:       %ld\n", DSR->hist.views );
-	fprintf( fp, "hist.vols_added:  %ld\n", DSR->hist.vols_added );
-	fprintf( fp, "hist.start_field: %ld\n", DSR->hist.start_field );
-	fprintf( fp, "hist.field_skip:  %ld\n", DSR->hist.field_skip );
-	fprintf( fp, "hist.omax:        %ld\n", DSR->hist.omax );
-	fprintf( fp, "hist.omin:        %ld\n", DSR->hist.omin );
-	fprintf( fp, "hist.smax:        %ld\n", DSR->hist.smax );
-	fprintf( fp, "hist.smin:        %ld\n", DSR->hist.smin );
+	fprintf( fp, "hist.views:       %d\n", DSR->hist.views );
+	fprintf( fp, "hist.vols_added:  %d\n", DSR->hist.vols_added );
+	fprintf( fp, "hist.start_field: %d\n", DSR->hist.start_field );
+	fprintf( fp, "hist.field_skip:  %d\n", DSR->hist.field_skip );
+	fprintf( fp, "hist.omax:        %d\n", DSR->hist.omax );
+	fprintf( fp, "hist.omin:        %d\n", DSR->hist.omin );
+	fprintf( fp, "hist.smax:        %d\n", DSR->hist.smax );
+	fprintf( fp, "hist.smin:        %d\n", DSR->hist.smin );
 	fprintf( fp, "\n\n");
 	fflush (fp);
 	return;

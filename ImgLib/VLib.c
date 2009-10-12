@@ -538,7 +538,7 @@ FILE *errfopen( char *fname, char *mode )
 	   } else {
 	      strcat(response,"could not be used.\n");
 	   }
-	   sprintf( gMessageStr,response );
+	   sprintf( gMessageStr, "%s", response );
 	   LogMessage( gMessageStr );
 #ifdef unix
 	   ILError( FILE_ERROR, response );
@@ -848,7 +848,7 @@ OSErr CreateTempFile( FILE **TempFile, char **itsName )
 	OSErr   error = noErr;
 	
 	*itsName = (char *)malloc( L_tmpnam );
-	mkstemp( *itsName );
+	tmpnam( *itsName );
 	
 	error = ck_fopen( TempFile, *itsName, "w" );
 	
@@ -1037,8 +1037,8 @@ OSErr cpy_alloc(void **destPtr, char *msg1, void *srcPtr, char *msg2)
 #endif
 
         if (cpy_dbg) {
-                sprintf( gMessageStr, "cpy_alloc: %s = %s (%08x = %08x)\n",
-                        msg1, msg2, *destPtr , srcPtr );
+                sprintf( gMessageStr, "cpy_alloc: %s = %s (%ld = %ld)\n",
+                        msg1, msg2, (unsigned long)*destPtr , (unsigned long)srcPtr );
                 LogMessage( gMessageStr );
         }
         *destPtr = srcPtr;
