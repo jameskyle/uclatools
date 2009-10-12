@@ -65,7 +65,7 @@ OSErr RenameFiles( int argc, char *argv[] )
 
 	error = ck_fclose( gTempFile );
 
-	tmpnam( nameFileName );
+	mkstemp( nameFileName );
 	sprintf( command, "sort %s > %s\n", gTempFName, nameFileName );
 	system( command );
 	return error;
@@ -187,7 +187,7 @@ int main( int argc, char **argv )
 
 	im.dim.timePts  = gNumTimePts;
 	im.dim.n_slices = gNumSlices;
-	
+
 // Make an analyze header
 	error = CreateHeader( ANALYZE, &im, argv[1] );
 	ILError( error, "Creating header" );

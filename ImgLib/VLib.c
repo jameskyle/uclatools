@@ -6,7 +6,7 @@
 * <font size=+1><b>$Date: 2006/06/09 18:48:00 $</b></font><p>
 *    A set of primitives for use in image processing.
 *               c 1996-2002  Mark S. Cohen
-*    
+*
 *    Please do not distribute without express permission of the author.
 *
 *    Users making changes or extensions to this software are instructed
@@ -209,7 +209,7 @@
  * Revision 1.1  1999/02/28  19:57:41  mscohen
  * Initial revision
  *
-* 
+*
 *	VLib.c
 *	A basic vector processing library - mostly utilities
 *	c1999-2001 Mark S. Cohen
@@ -221,7 +221,7 @@
 
 #include "VLib.h"
 #include "MathLib.h"
-#include <time.h>	
+#include <time.h>
 
 char gMessageStr[255];
 
@@ -260,7 +260,7 @@ OSErr	InitMessageLog( void )
 }
 
 /* --> *******************************************************************************
-* <b> LogMessage </b> 
+* <b> LogMessage </b>
 *  Unified Error logging
 *
 *	Requires that a global
@@ -292,11 +292,11 @@ OSErr	LogMessage( char *MessageString )
 #ifdef LogToScreen
 #define MessageLog stdout
 #endif
-	
+
 	if (dbg) {
 	    now = time ( NULL );
 	    date = localtime ( &now );
-	    strftime( str1, 128, "%A, %B %d, %Y %I:%M:%S %p", date ); 
+	    strftime( str1, 128, "%A, %B %d, %Y %I:%M:%S %p", date );
 
  /* LOGFILE.Mon */
 		error = InitMessageLog();
@@ -310,8 +310,8 @@ OSErr	LogMessage( char *MessageString )
 
 		fprintf( MessageLog, MessageString );
 		if( MessageString[ strlen( MessageString ) -1 ] != '\n' ) {
-			fprintf( MessageLog, "\n" );		
-			fprintf( MessageLog, "\n" );		
+			fprintf( MessageLog, "\n" );
+			fprintf( MessageLog, "\n" );
 		}
 		fflush( MessageLog );
 	}
@@ -340,7 +340,7 @@ void GetVLibVer( char *buff ) /* return a string describing VLib revision */
 }
 
 /* --> *******************************************************************************
-* <b> DBG </b> 
+* <b> DBG </b>
 *  Handy debugging utility.
 *
 *     void DBG ( char *msg )
@@ -353,13 +353,13 @@ void GetVLibVer( char *buff ) /* return a string describing VLib revision */
 void DBG ( char *msg )
 {
     static short count=1;
-    
+
     printf( "****\t%hd: %s\t****\n", count++, msg );
     fflush( stdout );
 }
 
 /* --> *******************************************************************************
-* <b> IsTrueorFalse </b> 
+* <b> IsTrueorFalse </b>
 *  Return Boolean value as a string (true or false).
 *    void IsTrueorFalse (Boolean b, char *s)
 *
@@ -371,7 +371,7 @@ void IsTrueorFalse (Boolean b, char *s)
 }
 
 /* --> *******************************************************************************
-* <b> ReportDataType </b> 
+* <b> ReportDataType </b>
 *  Return the name of the input file type as a string
 *
 *     char *ReportDataType( short data_type )
@@ -435,7 +435,7 @@ char *ReportDataType( short data_type )
 Boolean PercentCount( int count, int max, int stepSize, int *ans )
 {
 	static int prevAns;
-	
+
 	*ans = (100*count)/max;
 	if( *ans != prevAns && !(*ans % stepSize) ) {
 		prevAns = *ans;
@@ -446,7 +446,7 @@ Boolean PercentCount( int count, int max, int stepSize, int *ans )
 }
 
 /* --> *******************************************************************************
-* <B> SetTypeRange </b> 
+* <B> SetTypeRange </b>
 *		Set outMin and outMax to equal the data range of the data_type;
 *
 *       void SetTypeRange( float *outMax, float *outMin, short data_type )
@@ -461,7 +461,7 @@ void SetTypeRange( float *outMax, float *outMin, short data_type )
 			*outMin = CHAR_MIN;
 			*outMax = CHAR_MAX;
 		break;
-		
+
 		case T_UCHAR:
 			*outMin = 0;
 			*outMax = UCHAR_MAX;
@@ -489,7 +489,7 @@ void SetTypeRange( float *outMax, float *outMin, short data_type )
 	}
 }
 /* --> *******************************************************************************
-* <b> ShowError </b> 
+* <b> ShowError </b>
 *  Dump an error message to a log file. Assumes that the file has been opened.
 *
 *    void ShowError ( OSErr error, char *where, char *msg)
@@ -510,7 +510,7 @@ void ShowError ( OSErr error, char *where, char *msg)
 }
 
 /* --> *******************************************************************************
-* <b> errfopen </b> 
+* <b> errfopen </b>
 *  This function reports its own messages. Use ck_fopen for more standard approach
 *  Checks for valid file names and returns appropriate error messages
 *  A re-write of fopen with a small amount of error reportinf. No Mac equivalent.
@@ -558,7 +558,7 @@ ILError( error, errString );
 */
 
 /* --> *******************************************************************************
-*  <B> ck_fopen </b> 
+*  <B> ck_fopen </b>
 *
 *	Checks for valid file names and returns appropriate error messages.
 *
@@ -594,7 +594,7 @@ OSErr ck_fopen( FILE **f, char *fname, char *mode )
 }
 
 /* --> *******************************************************************************
-*  <b> ck_fwrite </b> 
+*  <b> ck_fwrite </b>
 * 	A wrapper for fwrite that checks for completion and posts an
 *	Error on failure. All arguments as in fwrite.
 *
@@ -619,7 +619,7 @@ OSErr  ck_fwrite( void *data, size_t itemSize, size_t nmemb, FILE *f )
 }
 
 /* --> *******************************************************************************
-*  <b> ck_fread </b> 
+*  <b> ck_fread </b>
 * 	A wrapper for fread that checks for completion and posts an
 *	Error on failure
 *
@@ -643,7 +643,7 @@ OSErr  ck_fread( void *data, size_t itemSize, size_t nmemb, FILE *f )
 }
 
 /* --> *******************************************************************************
-*  <b> ck_fclose </b> 
+*  <b> ck_fclose </b>
 * 	A wrapper for fclose that checks for completion
 *
 *    OSErr ck_fclose( FILE *f )
@@ -662,7 +662,7 @@ OSErr ck_fclose( FILE *f )
 }
 
 /* --> *******************************************************************************
-* <b> ck_malloc </b>  and<b> ck_calloc </b> 
+* <b> ck_malloc </b>  and<b> ck_calloc </b>
 *
 *   Really just a replacement for malloc and calloc with a small
 *   amount of error reporting.
@@ -688,7 +688,7 @@ Ptr ck_malloc( long size, char *msg )
 }
 
 Ptr ck_calloc( long number_of_objects, int size, char *msg )
-{ 
+{
    void *rtn = (void *) calloc(number_of_objects, size);
    if (!rtn) {
       sprintf( gMessageStr, "ck_malloc: Error allocating memory for: %s!\n", msg );
@@ -708,9 +708,9 @@ Ptr ck_malloc( long size, char *msg )
 	const short   ck_dbg = 1; /* 2 for always, 1 for routine dbg */
 
 	cbNeeded = ( Size )size;	/* this is what we need */
-	
+
 	PurgeMem(cbNeeded);		/* ask for memory to be released */
-	
+
 	error = MemError();	/* check for memory error */
 	if (error == memFullErr) {	/* incomplete? */
 		if (ck_dbg) {
@@ -735,7 +735,7 @@ Ptr ck_malloc( long size, char *msg )
 		                     bigBlock, FreeMem() );
 		LogMessage( gMessageStr );
 	}
-	
+
 	rtn = NewPtr( cbNeeded );
 	if( rtn == nil ) {
 		if (ck_dbg) {
@@ -748,7 +748,7 @@ Ptr ck_malloc( long size, char *msg )
 	} else {
 		error = MEMALLOCERROR; /* can only be memFullErr?? */
 	}
-	
+
 	ShowError( error, "ck_malloc: NewPtr returns nil.", msg );
 //	ShowErrorHook(error);
 	exit( -1 );
@@ -766,13 +766,13 @@ Ptr ck_calloc( long number_of_objects, int size, char *msg )
 {
 	OSErr         error;
 	Size          theSize, bigBlock, cbNeeded;  /* move those handles */
-	Ptr           rtn;   
+	Ptr           rtn;
 	const short   ck_dbg = 1; /* 2 for always, 1 for routine dbg */
 
 	cbNeeded = (Size)number_of_objects * size;	/* this is what we need */
-	
+
 	PurgeMem(cbNeeded);		/* ask for memory to be released */
-	
+
 	error = MemError();	/* check for memory error */
 	if (error == memFullErr) {	/* incomplete? */
 		if (ck_dbg) {
@@ -793,15 +793,15 @@ Ptr ck_calloc( long number_of_objects, int size, char *msg )
 	}
 
 	bigBlock = MaxMem( &theSize );
-	
+
 	if (ck_dbg == 2) {
 		sprintf( gMessageStr, "ck_calloc: biggest block is: %ld, free mem is %ld.\n",
 		                 bigBlock, FreeMem() );
 		LogMessage( gMessageStr );
 	}
-	
+
 	rtn = NewPtrClear( cbNeeded );
-	
+
 	if( rtn == nil ) {
 		if (ck_dbg) {
 			sprintf( gMessageStr, "ck_calloc: Error allocating memory for: %s!\n", msg );
@@ -828,7 +828,7 @@ Ptr ck_calloc( long number_of_objects, int size, char *msg )
 #endif
 
 /* --> *******************************************************************************
-*  <b> CreateTempFile </b> 
+*  <b> CreateTempFile </b>
 *   Open a temporary file for write and return its name
 *	OSErr CreateTempFile( FILE *TempFile, char **itsName )
 *
@@ -846,17 +846,17 @@ Ptr ck_calloc( long number_of_objects, int size, char *msg )
 OSErr CreateTempFile( FILE **TempFile, char **itsName )
 {
 	OSErr   error = noErr;
-	
+
 	*itsName = (char *)malloc( L_tmpnam );
-	tmpnam( *itsName );
-	
+	mkstemp( *itsName );
+
 	error = ck_fopen( TempFile, *itsName, "w" );
-	
+
 	return error;
 }
 
 /* --> *******************************************************************************
-*  <b> GetFileSize </b> 
+*  <b> GetFileSize </b>
 *   Determine the length of a specified file
 *	OSErr    GetFileSize( long *filesize,  -- the calculated file size
 *                         char *fname )    -- the file name (unaltered)
@@ -877,7 +877,7 @@ OSErr    GetFileSize( long *filesize, char *fname )
 }
 
 /* --> *******************************************************************************
-*  <b> ReadLastBytes </b> 
+*  <b> ReadLastBytes </b>
 *   Read at the end of a file
 *	OSErr    ReadLastBytes( char *fname, char *buff, long nBytes )
 <!--   *******************************************************************************/
@@ -901,7 +901,7 @@ OSErr    ReadLastBytes( char *fname, char *buff, long nBytes )
 
 #ifdef MAC
 /* --> *******************************************************************************
-*   <b> LockHandleToPointer </b> 
+*   <b> LockHandleToPointer </b>
 *    Lock a handle and return a pointer to its data (Macintosh).
 *    This is used to address memory using standard C constructs (e.g., ImgLib)
 *    within the Mac memory management.
@@ -912,7 +912,7 @@ OSErr    ReadLastBytes( char *fname, char *buff, long nBytes )
 *
 <!--   *******************************************************************************/
 OSErr LockHandleToPointer( Handle h, void **p, SignedByte *state )
-{	
+{
 /* get current state of handle so caller can restore it to original state */
 	*state = HGetState(h);
 
@@ -921,14 +921,14 @@ OSErr LockHandleToPointer( Handle h, void **p, SignedByte *state )
 	if( h == nil || *h == nil ) {
 		return INVALID_ADDRESS;
 	}
-	
+
 	*p = (void *)*h;
-	
+
 	return noErr;
-}		
+}
 
 /* --> *******************************************************************************
-*  <b> ck_AllocateHandle </b> 
+*  <b> ck_AllocateHandle </b>
 *
 	Unified memory allocation for handles. Whenever possible, make
 	this call instead of calling NewHandle() directly. This will
@@ -946,19 +946,19 @@ OSErr	ck_AllocateHandle(long size, Handle *handleAddress)
 {
 	OSErr	error = noErr;
 	long	totalSize, contigSize;
-	
+
 /* see if we have enough room in memory */
 	PurgeSpace(&totalSize, &contigSize);
-	
+
 /* if a purge would result in the largest block being too small */
-	if (contigSize < size) { 
+	if (contigSize < size) {
 		error = memFullErr;	/* so we're out of memory */
 	}
 	if (error) {
 		*handleAddress = nil;
 		return error;
-	}	
-	
+	}
+
 /* allocate handle */
 	*handleAddress = NewHandle(size);
 	if(!*handleAddress) {
@@ -970,7 +970,7 @@ OSErr	ck_AllocateHandle(long size, Handle *handleAddress)
 #endif
 
 /* --> *******************************************************************************
-*  <b> memFree </b> 
+*  <b> memFree </b>
 *
 *   OSErr memFree( void **theMem, char *msg  )
 *
@@ -990,7 +990,7 @@ OSErr memFree( void **theMem, char *msg  )
 
 /*
 	if (ck_dbg) {
-		sprintf( gMessageStr,"memFree: deallocating memory [%08x] for: %s, size: %08x.\n", 
+		sprintf( gMessageStr,"memFree: deallocating memory [%08x] for: %s, size: %08x.\n",
 		         *theMem, msg, GetPtrSize((char *)*theMem) );
 		LogMessage( gMessageStr );
 	}
@@ -1012,7 +1012,7 @@ OSErr memFree( void **theMem, char *msg  )
 }
 
 /* --> *******************************************************************************
-*  <b> cpy_alloc </b> 
+*  <b> cpy_alloc </b>
 *	Copy memory addresses to new name, implemented as a special
 *	function so that we can track it.
 *
@@ -1025,7 +1025,7 @@ OSErr cpy_alloc(void **destPtr, char *msg1, void *srcPtr, char *msg2)
 
    /* we're about to bury a pts to some alloc'd memory! */
    /* we can clean this up; but we may complain */
-#ifdef MAC		
+#ifdef MAC
  OSErr   DisposeWindowMemoryItem  (Ptr *p, char *msg);
 
         if (*destPtr != nil) {
@@ -1046,7 +1046,7 @@ OSErr cpy_alloc(void **destPtr, char *msg1, void *srcPtr, char *msg2)
 }
 
 /* --> *******************************************************************************
-*  <b> YorN </b> 
+*  <b> YorN </b>
 *   Yield a string (Yes or No) based on a boolean
 *
 *    char *YorN( int( theFlag ))
@@ -1092,7 +1092,7 @@ Boolean macByteOrder()
 
 
 /* --> *******************************************************************************
-*   <b> lowerString </b>  
+*   <b> lowerString </b>
 *    void lowerString( char *theString )
 *
 *    Force a string to lower case
@@ -1100,7 +1100,7 @@ Boolean macByteOrder()
 void	lowerString( char *theString )
 {
 	char *p;
-	
+
 	p = theString;
 	while( *p ) {
 		*p = tolower( *p );
@@ -1109,7 +1109,7 @@ void	lowerString( char *theString )
 }
 
 /* --> *******************************************************************************
-*  <b> vmov </b> 
+*  <b> vmov </b>
 *   Copy the contents of invec to outvec, leaving invec intact.
 *   vectors must be of same type!
 *
@@ -1137,8 +1137,8 @@ OSErr  vmov( void *invec, int instep, void *outvec, int ostep, long vlen, int da
 	}
 	sizeof_element = get_datasize( data_type );
 
-	/* memcpy should be faster */  
-	if( instep==ostep==1 ) { 
+	/* memcpy should be faster */
+	if( instep==ostep==1 ) {
 		memcpy( outvec, invec, sizeof_element * vlen );
 	} else {
 		vec1 = (char *)invec;
@@ -1153,7 +1153,7 @@ OSErr  vmov( void *invec, int instep, void *outvec, int ostep, long vlen, int da
 }
 
 /* --> *******************************************************************************
-*  <b> vfill </b> 
+*  <b> vfill </b>
 *   Fill a vector with a constant value
 *
 *   CALLING SEQUENCE
@@ -1189,7 +1189,7 @@ OSErr  vfill( void *invec,  void *fill, long vlen, int data_type)
 }
 
 /* --> *******************************************************************************
-*  <b> vfsmul </b> 
+*  <b> vfsmul </b>
 *   Multiply each element in the vector by a floating point scalar.
 *   vector and scalar must be of same type!
 *	May be used in place.
@@ -1226,7 +1226,7 @@ OSErr  vfsmul(void *src, int instep, void *dst, int ostep,
 
 	if( src == nil || dst == nil ) {
 		return INVALID_ADDRESS;
-	}	
+	}
 	switch( data_type )  {
 		case T_CHAR:
 			csrc = (char *)src;
@@ -1234,21 +1234,21 @@ OSErr  vfsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(cdst+j) = (char)(scalar * *(csrc+i) + 0.5);
 			}
-		break;   
+		break;
 		case T_SHORT:
 			ssrc = (short *)src;
 			sdst = (short *)dst;
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(sdst+j) = (short)(scalar * *(ssrc+i) + 0.5);
 			}
-		break;   
+		break;
 		case T_INT:
 			isrc = (int *)src;
 			idst = (int *)dst;
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(idst+j) = (int)(scalar * *(isrc+i) + 0.5);
 			}
-		break;   
+		break;
 		case T_FLOAT:
 		case T_COMPLEX:
 			if( data_type == T_COMPLEX ) {
@@ -1259,27 +1259,27 @@ OSErr  vfsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(fdst+j) = (float)(scalar * *(fsrc+i));
 			}
-		break;   
+		break;
 			fsrc = (float *)src;
 			fdst = (float *)dst;
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(fdst+j) = (float)(scalar * *(fsrc+i));
 			}
-		break;   
+		break;
 		case T_DOUBLE:
 			dsrc = (double *)src;
 			ddst = (double *)dst;
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(ddst+j) = (double)(scalar * *(dsrc+i));
 			}
-		break;   
+		break;
 		case T_UCHAR:
 			ucsrc = (unsigned char *)src;
 			ucdst = (unsigned char *)dst;
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(ucdst+j) = (unsigned char)(scalar * *(ucsrc+i) + 0.5);
 			}
-		break;   
+		break;
 		case T_USHORT:
 			uisrc = (unsigned short *)src;
 			uidst = (unsigned short *)dst;
@@ -1296,7 +1296,7 @@ OSErr  vfsmul(void *src, int instep, void *dst, int ostep,
 }
 
 /* --> *******************************************************************************
-*  <b> vsmul </b> 
+*  <b> vsmul </b>
 *   Multiply each element in the vector by a scalar.
 *   vector and scalar must be of same type!
 *	May be used in place.
@@ -1332,7 +1332,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 
 	if( src == nil || dst == nil ) {
 		return INVALID_ADDRESS;
-	}	
+	}
 
 	switch( data_type )  {
 		case T_CHAR:
@@ -1342,7 +1342,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(cdst+j) = cs * *(csrc+i);
 			}
-		break;   
+		break;
 
 		case T_SHORT:
 			ssrc = (short *)src;
@@ -1351,7 +1351,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(sdst+j) = ss * *(ssrc+i);
 			}
-		break;   
+		break;
 
 		case T_INT:
 			isrc = (int *)src;
@@ -1360,7 +1360,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(idst+j) = is * *(isrc+i);
 			}
-		break;   
+		break;
 
 		case T_FLOAT:
 		case T_COMPLEX:
@@ -1373,7 +1373,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(fdst+j) = fs * *(fsrc+i);
 			}
-		break;   
+		break;
 
 		case T_DOUBLE:
 			dsrc = (double *)src;
@@ -1382,7 +1382,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(ddst+j) = ds * *(dsrc+i);
 			}
-		break;   
+		break;
 
 		case T_UCHAR:
 			ucsrc = (unsigned char *)src;
@@ -1391,7 +1391,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 			for( i=0, j=0; i<vlen*instep; i+=instep, j+=ostep ) {
 				*(ucdst+j) = ucs * *(ucsrc+i);
 			}
-		break;   
+		break;
 		case T_USHORT:
 			uisrc = (unsigned short *)src;
 			uidst = (unsigned short *)dst;
@@ -1409,7 +1409,7 @@ OSErr  vsmul(void *src, int instep, void *dst, int ostep,
 }
 
 /* --> *******************************************************************************
-*  <b> vadd </b> 
+*  <b> vadd </b>
 *   Add the elements in two vectors and place the sum in a third.
 *   All vectors must be of the same type!
 *
@@ -1442,28 +1442,28 @@ OSErr vadd ( void *invec1, int step1, void *invec2, int step2,
 
    if( invec1==nil || invec2==nil || outvec==nil ) {
 		return INVALID_ADDRESS;
-   }	
+   }
 	switch( data_type )  {
 		case T_CHAR:
 			cv1 = (char *)invec1; cv2 = (char *)invec2; cov = (char *)outvec;
 			for( i=j=k=m=0; i<vlen; i++, j+=step1, k+=step2, m+=out_step ) {
 				*(cov+m) = *(cv1+j) + *(cv2+k);
 			}
-		break;   
+		break;
 
 		case T_SHORT:
 			sv1 = (short *)invec1; sv2 = (short *)invec2; sov = (short *)outvec;
 			for( i=j=k=m=0; i<vlen; i++, j+=step1, k+=step2, m+=out_step ) {
 				*(sov+m) = *(sv1+j) + *(sv2+k);
 			}
-		break;   
+		break;
 
 		case T_INT:
 			iv1 = (int *)invec1; iv2 = (int *)invec2; iov = (int *)outvec;
 			for( i=j=k=m=0; i<vlen; i++, j+=step1, k+=step2, m+=out_step ) {
 				*(iov+m) = *(iv1+j) + *(iv2+k);
 			}
-		break;   
+		break;
 
 		case T_FLOAT:
 		case T_COMPLEX:
@@ -1474,14 +1474,14 @@ OSErr vadd ( void *invec1, int step1, void *invec2, int step2,
 			for( i=j=k=m=0; i<vlen; i++, j+=step1, k+=step2, m+=out_step ) {
 				*(fov+m) = *(fv1+j) + *(fv2+k);
 			}
-		break;   
+		break;
 
 		case T_DOUBLE:
 			dv1 = (double *)invec1; dv2 = (double *)invec2; dov = (double *)outvec;
 			for( i=j=k=m=0; i<vlen; i++, j+=step1, k+=step2, m+=out_step ) {
 				*(dov+m) = *(dv1+j) + *(dv2+k);
 			}
-		break;   
+		break;
 
 		case T_UCHAR:
 			ucv1 = (unsigned char *)invec1; ucv2 = (unsigned char *)invec2;
@@ -1489,7 +1489,7 @@ OSErr vadd ( void *invec1, int step1, void *invec2, int step2,
 			for( i=j=k=m=0; i<vlen; i++, j+=step1, k+=step2, m+=out_step ) {
 				*(ucov+m) = *(ucv1+j) + *(ucv2+k);
 			}
-		break;   
+		break;
 
 		case T_USHORT:
 			uiv1 = (unsigned short *)invec1; uiv2 = (unsigned short *)invec2;
@@ -1508,7 +1508,7 @@ OSErr vadd ( void *invec1, int step1, void *invec2, int step2,
 }
 
 /* --> *******************************************************************************
-*  <b> vsub </b> 
+*  <b> vsub </b>
 *   Take the difference of the elements in two vectors and place it in a third.
 *   All vectors must be of the same type!
 *
@@ -1541,7 +1541,7 @@ OSErr vsub( void *invec1, int step1, void *invec2, int step2,
 
    if( invec1==nil || invec2==nil || outvec==nil ) {
 		return INVALID_ADDRESS;
-   }	
+   }
 	switch( data_type )  {
 		case T_CHAR:
 			cv1 = (char *)invec1; cv2 = (char *)invec2; cov = (char *)outvec;
@@ -1607,7 +1607,7 @@ OSErr vsub( void *invec1, int step1, void *invec2, int step2,
 }
 
 /* --> *******************************************************************************
-*  <b> vmul </b> 
+*  <b> vmul </b>
 *   Multiply the elements in two vectors and place the product in a third.
 *   All vectors must be of the same type!
 *
@@ -1640,7 +1640,7 @@ OSErr vmul( void *invec1, int step1, void *invec2, int step2,
 
    if( invec1==nil || invec2==nil || outvec==nil ) {
 		return INVALID_ADDRESS;
-   }	
+   }
 	switch( data_type )  {
 		case T_CHAR:
 			cv1 = (char *)invec1; cv2 = (char *)invec2; cov = (char *)outvec;
@@ -1670,7 +1670,7 @@ OSErr vmul( void *invec1, int step1, void *invec2, int step2,
 			fv1 = (float *)invec1; fv2 = (float *)invec2; fov = (float *)outvec;
 			for( i=j=k=m=0; i<vlen; i++, j+=2*step1, k+=2*step2, m+=2*out_step ) {
 				*(fov+m) = *(fv1+j) * *(fv2+k);
-				fov[m]   = fv1[j] * fv2[k] - fv1[j+1] * fv2[k+1]; 
+				fov[m]   = fv1[j] * fv2[k] - fv1[j+1] * fv2[k+1];
 				fov[m+1] = fv1[j] * fv2[k+1] + fv1[j+1] * fv2[k];
 			}
 		break;
@@ -1703,7 +1703,7 @@ OSErr vmul( void *invec1, int step1, void *invec2, int step2,
 }
 
 /* --> *******************************************************************************
-*  <b> vdiv </b> 
+*  <b> vdiv </b>
 *   Divide the elements of numvec1 by denvec2 and place the ratio in outvec.
 *   All vectors must be of the same type!
 *   NOTE:  RETURNS outvec[i] UNCHANGED IF denvec[i] IS 0 !!!!
@@ -1738,7 +1738,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 
 	if( numvec==nil || denvec==nil || outvec==nil ) {
 		return INVALID_ADDRESS;
-	}	
+	}
 
 	switch( data_type )  {
 		case T_CHAR:
@@ -1755,7 +1755,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 					}
 				}
 			}
-		break;   
+		break;
 
 		case T_SHORT:
 			snumvec = (short *)numvec;
@@ -1771,7 +1771,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 					}
 				}
 			}
-		break;   
+		break;
 
 		case T_INT:
 			inumvec = (int *)numvec;
@@ -1787,7 +1787,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 					}
 				}
 			}
-		break;   
+		break;
 
 		case T_FLOAT:
 			fnumvec = (float *)numvec;
@@ -1803,7 +1803,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 					}
 				}
 			}
-		break;   
+		break;
 
 		case T_COMPLEX:
 			fnumvec = (float *)numvec;
@@ -1815,15 +1815,15 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 				} else {
 					outvec[m]   = (fnumvec[j] * fdenvec[k] + fnumvec[j+1] * fdenvec[k+1]) /
 						(fdenvec[k]*fdenvec[k] + fdenvec[k+1]*fdenvec[k+1] );
-						
+
 					outvec[m+1] = (fnumvec[j+1] * fdenvec[k] - fnumvec[j] * fdenvec[k+1]) /
-						(fdenvec[k]*fdenvec[k] + fdenvec[k+1]*fdenvec[k+1] );						
+						(fdenvec[k]*fdenvec[k] + fdenvec[k+1]*fdenvec[k+1] );
 /*				} else {
 					printf( "point: %ld\n", j );
 					return DIVIDE_BY_ZERO_ERR; */
 				}
 			}
-		break;   
+		break;
 
 		case T_DOUBLE:
 			dnumvec = (double *)numvec;
@@ -1839,7 +1839,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 					}
 				}
 			}
-		break;   
+		break;
 
 		case T_UCHAR:
 			ucnumvec = (unsigned char *)numvec;
@@ -1855,7 +1855,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 					}
 				}
 			}
-		break;   
+		break;
 
 		case T_USHORT:
 			uinumvec = (unsigned short *)numvec;
@@ -1881,7 +1881,7 @@ OSErr vdiv( void *numvec, int step1, void *denvec, int step2,
 }
 
 /* --> *******************************************************************************
-*  <b> vminmax </b> 
+*  <b> vminmax </b>
 *
 *   Determine the minimum and maximum in the vector.
 *   CALLING SEQUENCE:
@@ -1907,7 +1907,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 
 	if( invec == nil ) {
 		return INVALID_ADDRESS;
-	}	
+	}
 	switch( data_type )  {
 		case T_CHAR:
 			cvec = (char *)invec;
@@ -1918,7 +1918,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 			}
 			vmov(&cmax,1,vecmax,1,1,T_CHAR);
 			vmov(&cmin,1,vecmin,1,1,T_CHAR);
-		break;   
+		break;
 
 		case T_SHORT:
 			svec = (short *)invec;
@@ -1929,7 +1929,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 			}
 			vmov(&smax,1,vecmax,1,1,T_SHORT);
 			vmov(&smin,1,vecmin,1,1,T_SHORT);
-		break;   
+		break;
 
 		case T_INT:
 			ivec = (int *)invec;
@@ -1940,7 +1940,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 			}
 			vmov(&imax,1,vecmax,1,1,T_INT);
 			vmov(&imin,1,vecmin,1,1,T_INT);
-		break;   
+		break;
 
 		case T_FLOAT:
 		case T_COMPLEX:
@@ -1955,7 +1955,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 			}
 			vmov(&fmax,1,vecmax,1,1,T_FLOAT);
 			vmov(&fmin,1,vecmin,1,1,T_FLOAT);
-		break;   
+		break;
 
 		case T_DOUBLE:
 			dvec = (double *)invec;
@@ -1977,7 +1977,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 			}
 			vmov(&ucmax,1,vecmax,1,1,T_UCHAR);
 			vmov(&ucmin,1,vecmin,1,1,T_UCHAR);
-		break;   
+		break;
 
 		case T_USHORT:
 			uinvec = (unsigned short *)invec;
@@ -1999,7 +1999,7 @@ OSErr vminmax( void *invec, long vlen, void *vecmax, void *vecmin, int data_type
 }
 
 /* --> *******************************************************************************
-*  <b> vfminmax </b> 
+*  <b> vfminmax </b>
 *
 *   Determine the minimum and maximum in the vector.
 *   CALLING SEQUENCE:
@@ -2028,7 +2028,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 	if( invec == nil ) {
 		return INVALID_ADDRESS;
 	}
-	
+
 	switch( data_type )  {
 		case T_CHAR:
 			cvec = (char *)invec;
@@ -2037,7 +2037,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 				fmax = fmax > (float)cvec[i] ? fmax : (float)cvec[i];
 				fmin = fmin < (float)cvec[i] ? fmin : (float)cvec[i];
 			}
-		break;   
+		break;
 
 		case T_SHORT:
 			svec = (short *)invec;
@@ -2046,7 +2046,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 				fmax = fmax > (float)svec[i] ? fmax : (float)svec[i];
 				fmin = fmin < (float)svec[i] ? fmin : (float)svec[i];
 			}
-		break;   
+		break;
 
 		case T_INT:
 			ivec = (int *)invec;
@@ -2055,7 +2055,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 				fmax = fmax > (float)ivec[i] ? fmax : (float)ivec[i];
 				fmin = fmin < (float)ivec[i] ? fmin : (float)ivec[i];
 			}
-		break;   
+		break;
 
 		case T_FLOAT:
 		case T_COMPLEX:
@@ -2068,7 +2068,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 				fmax = fmax > (float)fvec[i] ? fmax : (float)fvec[i];
 				fmin = fmin < (float)fvec[i] ? fmin : (float)fvec[i];
 			}
-		break;   
+		break;
 
 		case T_DOUBLE:
 			dvec = (double *)invec;
@@ -2086,7 +2086,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 				fmax = fmax > (float)ucvec[i] ? fmax : (float)ucvec[i];
 				fmin = fmin < (float)ucvec[i] ? fmin : (float)ucvec[i];
 			}
-		break;   
+		break;
 
 		case T_USHORT:
 			uinvec = (unsigned short *)invec;
@@ -2106,7 +2106,7 @@ OSErr vfminmax( void *invec, long vlen, float *vecmax, float *vecmin, int data_t
 	return error;
 }
 /* --> *******************************************************************************
-*  <b> vsqrt </b> 
+*  <b> vsqrt </b>
 *   Square root of each element of a vector in place.
 *
 *   CALLING SEQUENCE
@@ -2132,7 +2132,7 @@ OSErr  vsqrt( void *invec, int step, long vlen, int data_type )
 
    if( invec == nil ) {
 		return INVALID_ADDRESS;
-   }	
+   }
 	switch( data_type )  {
 		case T_CHAR:
 			cp = (char *)invec;
@@ -2224,7 +2224,7 @@ OSErr  vsqrt( void *invec, int step, long vlen, int data_type )
 }
 
 /* --> *******************************************************************************
-*  <b> vsq </b> 
+*  <b> vsq </b>
 *   Square each element of a vector in place.
 *
 *   CALLING SEQUENCE
@@ -2250,7 +2250,7 @@ OSErr vsq( void *invec, int step, long vlen, int data_type )
 
 	if( invec == nil ) {
 		return INVALID_ADDRESS;
-	}	
+	}
 
 	switch( data_type )  {
 		case T_CHAR:
@@ -2316,7 +2316,7 @@ OSErr vsq( void *invec, int step, long vlen, int data_type )
 }
 
 /* --> *******************************************************************************
-*  <b> vssq </b> 
+*  <b> vssq </b>
 *   Return the sum of squares of a vector. Return is always a float.
 *   Calling program should typecast if needed.
 *
@@ -2405,7 +2405,7 @@ double vssq( void *invec, int step, long vlen, int data_type )
 }
 
 /* --> *******************************************************************************
-*  <b> vsum </b> 
+*  <b> vsum </b>
 *   Return the sum all elements in a vector. Return is always a float.
 *   Calling program should typecast if needed.
 *
@@ -2494,7 +2494,7 @@ double vsum( void *invec, int step, long vlen, int data_type )
 }
 
 /* --> *******************************************************************************
-*  <b> vabs </b> 
+*  <b> vabs </b>
 *   Return the absolute value of each element in a vector.
 *
 *   CALLING SEQUENCE
@@ -2585,7 +2585,7 @@ OSErr vabs( void *invec, int istep, void *ovec, int ostep, long vlen, int data_t
 }
 
 /* --> *******************************************************************************
-*  <b> vclr </b> 
+*  <b> vclr </b>
 *   Clear the contents of a vector
 *
 *   CALLING SEQUENCE:
@@ -2605,7 +2605,7 @@ OSErr vclr(void * vec, long vlen, int data_type)
 
 	if( vec == nil ) {
 		return INVALID_ADDRESS;
-	}	
+	}
 
 	dataSize = get_datasize( data_type );
 	p=(unsigned char *)vec;
@@ -2617,7 +2617,7 @@ OSErr vclr(void * vec, long vlen, int data_type)
 }
 
 /* --> *******************************************************************************
-*  <b> get_datasize </b> 
+*  <b> get_datasize </b>
 *   Get the size (in bytes) of the local data types.
 *
 *   CALLING SEQUENCE:
@@ -2649,7 +2649,7 @@ switch( data_type ) {
 }
 
 /* --> *******************************************************************************
-* <b> vbyteswap </b> 
+* <b> vbyteswap </b>
 *    Byte swapping utility for managing the order on DEC and Sun
 *
 *    OSErr    vbyteswap(void *invec, long vlen, int data_type)
@@ -2704,7 +2704,7 @@ OSErr    vbyteswap(void *invec, long vlen, int data_type)
 #undef fourBytes
 
 /* --> *******************************************************************************
-* <b> vbyteNswap </b> 
+* <b> vbyteNswap </b>
 *  Byte swapping utility for items of known length
 *
 *   OSErr    vbyteNswap(void *invec, long vlen, short n_bytes)
@@ -2718,7 +2718,7 @@ OSErr    vbyteNswap(void *invec, long vlen, short n_bytes)
     if( invec == nil ) {
 		return INVALID_ADDRESS;
 	}
-	
+
     vec = (char *)invec;
 	{
 		for( i=0; i<vlen*n_bytes; i+= n_bytes )  {
@@ -2733,7 +2733,7 @@ OSErr    vbyteNswap(void *invec, long vlen, short n_bytes)
 }
 
 /* --> *******************************************************************************
-*  <B> ConvertToPercent </b> 
+*  <B> ConvertToPercent </b>
 *   Express invec as a percent change from refvec. If refvec is zero, output is zero
 *
 *    OSErr ConvertToPercent( void *invec,        -- pointer to input vector
@@ -2770,7 +2770,7 @@ OSErr ConvertToPercent( void *invec, void *refvec, void *outvec, long vlen, int 
 				}
 			}
 		break;
-		
+
 		case T_SHORT:
 			sv1 = (short *)invec; sv2 = (short *)refvec; sov = (short *)outvec;
 			for( i=0; i<vlen; i++ ) {
@@ -2846,7 +2846,7 @@ OSErr ConvertToPercent( void *invec, void *refvec, void *outvec, long vlen, int 
 }
 
 /* --> *******************************************************************************
-*  <B> type_convert </b> 
+*  <B> type_convert </b>
 *   Conversion between float, unsigned short and unsigned char
 *	and, as of 6-18-02, signed short.
 *
@@ -2886,7 +2886,7 @@ OSErr type_convert( void *inData, int inType, void *convertedData, int outType,
 	unsigned short usmax, usmin;  /* max/min of unsigned short input data */
 	short          smax, smin;    /* max/min of signed short input data */
 	OSErr          error = noErr;
-	
+
 	if( inType == outType ) {
 		error = vmov( inData, 1, convertedData, 1, nPts, inType );
 		return error;
@@ -2894,7 +2894,7 @@ OSErr type_convert( void *inData, int inType, void *convertedData, int outType,
 
 /* The heart of this function is here. For each input type, make a conversion to each output type.
 chars are simply copied. If output type is higher resolution and equal or greater range, just copy.
-float and short types must be rescaled to convert to char or short. */ 
+float and short types must be rescaled to convert to char or short. */
 
 	switch( inType ) {
 		case T_UCHAR:	 /* input is unsigned char, no scaling, no loss of accuracy */
@@ -2922,20 +2922,20 @@ float and short types must be rescaled to convert to char or short. */
 				pf=(float *)convertedData;
 				for( i=0; i<nPts; i++ ) {
 					pf[i] = (float)pc[i];
-				} 
-			
+				}
+
 /* UCHAR to COMPLEX */
 			} else if(outType == T_COMPLEX) { /* output is float */
 				pf=(float *)convertedData;
 				for( i=0; i<nPts; i++ ) {
 					pf[i*2]     = (float)pc[i];
 					pf[i*2 + 1] = 0.0;
-				} 
+				}
 			}
-			
+
 		break;
 
-		case T_USHORT:			
+		case T_USHORT:
 			pus = (unsigned short *)inData; /* input is unsigned short */
 			error = vminmax( inData, nPts, &usmax, &usmin, T_USHORT );
 				RETURNONERROR;
@@ -2961,7 +2961,7 @@ float and short types must be rescaled to convert to char or short. */
 /* USHORT to SHORT */
 			} else if( outType == T_SHORT ) {
 				ps = (short *)convertedData;
-				
+
 				if( usmax > SHRT_MAX ) { /* must rescale if input exceeds SHRT_MAX */
 					short HalfMax = SHRT_MAX/2;
 					for( i=0; i<nPts; i++ ) {
@@ -2969,12 +2969,12 @@ float and short types must be rescaled to convert to char or short. */
 					}
 					SET( *rules, kDataRescaled );
 					error = CONVERSION_ERROR;
-				} else { 
+				} else {
 					for( i=0; i<nPts; i++ ) {
 						ps[i] = pus[i];
 					}
 				}
-										
+
 /* USHORT to UCHAR */
 			} else if( outType==T_UCHAR ) { /* output is unsigned char, scale to 0 - UCHAR_MAX, if needed */
 				pc = (unsigned char *)convertedData;
@@ -2990,11 +2990,11 @@ float and short types must be rescaled to convert to char or short. */
 					}
 					SET( *rules, kResolutionLost + kDataRescaled );
 					error = CONVERSION_ERROR;
-				} 
-			} 
+				}
+			}
 		break;
 
-		case T_SHORT:			
+		case T_SHORT:
 			ps = (short *)inData; /* input is signed short */
 			error = vminmax( inData, nPts, &smax, &smin, T_SHORT );
 				RETURNONERROR;
@@ -3021,7 +3021,7 @@ float and short types must be rescaled to convert to char or short. */
 			} else if( outType == T_USHORT ) {
 				unsigned short HalfMax;
 				pus = (unsigned short *)convertedData;
-				
+
 				if( smin < 0 ) { /* negative input values, must rescale */
 					HalfMax = 1 + USHRT_MAX/2;
 					for( i=0; i<nPts; i++) {
@@ -3030,9 +3030,9 @@ float and short types must be rescaled to convert to char or short. */
 				} else {
 					for( i=0; i<nPts; i++) {
 						pus[i] = ps[i];
-					}					
+					}
 				}
-				
+
 /* SHORT to UCHAR */
 			} else if( outType==T_UCHAR ) { /* output is unsigned char, scale to 0 - UCHAR_MAX, if needed */
 				pc = (unsigned char *)convertedData;
@@ -3048,8 +3048,8 @@ float and short types must be rescaled to convert to char or short. */
 					}
 					SET( *rules, kResolutionLost + kDataRescaled );
 					error = CONVERSION_ERROR;
-				} 
-			} 
+				}
+			}
 		break;
 
 		case T_COMPLEX:
@@ -3067,13 +3067,13 @@ float and short types must be rescaled to convert to char or short. */
 
 			SET( *rules, kResolutionLost);
 			error = CONVERSION_ERROR;
-			
+
 /* COMPLEX (FLOAT) to FLOAT */
 			if( outType == T_FLOAT ) {
 				error = vmov( pf, 1, convertedData, 1, nPts, T_FLOAT );
 				RETURNONERROR;
 			}
-			
+
 /* FLOAT to DOUBLE */
 			if( outType == T_DOUBLE ) {
 				pd = (double *)convertedData;
@@ -3220,7 +3220,7 @@ float and short types must be rescaled to convert to char or short. */
 }
 
 /* --> *******************************************************************************
-*     Swapping for simple types:<b> swI swF swS swUS swUI swD swL </b> 
+*     Swapping for simple types:<b> swI swF swS swUS swUI swD swL </b>
 *     Each swaps the original in place and returns the swapped value in place
 *
 *     int            swI( int *RevInt )
@@ -3274,7 +3274,7 @@ long swL( long *RevLong )
 }
 
 /* --> *******************************************************************************
-<B> MoveSwap </b>  
+<B> MoveSwap </b>
 MoveSwap moves data from Src to Dst, swapping the bytes, if requested
 OSErr MoveSwap( void *Src,        // The location of a simple data type
 				void *Dst,        // output location for the data (swapped or unswapped)
@@ -3294,28 +3294,28 @@ OSErr MoveSwap( void *Src, void *Dst, Boolean swap, short data_type )
 			case T_CHAR:
 			case T_UCHAR:
 			break;
-			
+
 			case T_SHORT:
 			case T_USHORT:
 				swS( (short *)Dst );
-			break; 
-	
+			break;
+
 			case T_INT:
 				swI( (int *)Dst );
 			break;
-	
+
 			case T_FLOAT:
 				swF( (float *)Dst );
 			break;
-	
+
 			case T_DOUBLE:
 				swD( (double *)Dst );
 			break;
-	
+
 			case T_LONG:
 				swL( (long *)Dst );
 			break;
-	
+
 			default:
 				error = UNKNOWNTYPE;
 		}
@@ -3324,7 +3324,7 @@ OSErr MoveSwap( void *Src, void *Dst, Boolean swap, short data_type )
 }
 
 /* --> *******************************************************************************
-*<b> equalString </b> 
+*<b> equalString </b>
 * Test to see that two strings are equal, and return a Boolean
 * true if s1 and s2 are the same. false otherwise
 *
@@ -3340,7 +3340,7 @@ int equalString( char *s1, char *s2 )
 }
 
 /* --> *******************************************************************************
-*<b> CountWords </b> 
+*<b> CountWords </b>
 * Count the number of words in a string.
 *
 * int CountWords( char *InputString, int *NumWords )
